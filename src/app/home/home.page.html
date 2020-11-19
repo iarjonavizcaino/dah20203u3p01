@@ -1,20 +1,50 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Perfiles
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <ion-slides *ngIf="profiles.length>0">
+    <ion-slide *ngFor="let profile of profiles; index as i">
+      <ion-card>
+        <img src='{{profile.photo}}'>
+        <ion-card-header>
+          <ion-card-title>{{profile.name}}</ion-card-title>
+          <ion-card-subtitle>{{profile.place}}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-badge color="danger">{{profile.loveCount}}</ion-badge>
+          &nbsp;
+          <ion-badge color="primary">{{profile.likeCount}}</ion-badge>
+
+          <div *ngIf="profile.interest.length">
+            <div *ngFor="let inter of profile.interest; index as j">
+              <ion-chip color="primary">
+                <ion-label>{{inter.description}}</ion-label>
+              </ion-chip>
+            </div> 
+          </div>
+          <ion-fab vertical="top" horizontal="end" slot="fixed">
+            <ion-fab-button>
+              <ion-icon name="add"></ion-icon>
+            </ion-fab-button>
+            <ion-fab-list side="top">
+              <ion-fab-button color="danger">
+                <ion-icon name="heart"></ion-icon>
+              </ion-fab-button>
+              <ion-fab-button color="primary">
+                <ion-icon name="thumbs-up"></ion-icon>
+              </ion-fab-button>
+            </ion-fab-list>
+          </ion-fab>
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
+
+
 </ion-content>
